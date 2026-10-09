@@ -1,0 +1,2222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Python Reviewer | Lessons 1-8</title>
+
+<style>
+
+/* ==============================
+   BASIC DESIGN
+============================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #020617;
+    color: #e2e8f0;
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+/* ==============================
+   ANIMATED BACKGROUND
+============================== */
+
+body::before {
+    content: "";
+    position: fixed;
+
+    width: 500px;
+    height: 500px;
+
+    background: #3776ab;
+    border-radius: 50%;
+
+    filter: blur(130px);
+    opacity: 0.25;
+
+    top: -150px;
+    left: -150px;
+
+    animation: blueMove 8s infinite alternate;
+
+    z-index: -2;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+
+    width: 450px;
+    height: 450px;
+
+    background: #ffd43b;
+    border-radius: 50%;
+
+    filter: blur(130px);
+    opacity: 0.12;
+
+    bottom: -150px;
+    right: -150px;
+
+    animation: yellowMove 10s infinite alternate;
+
+    z-index: -2;
+}
+
+@keyframes blueMove {
+
+    from {
+        transform: translate(0,0);
+    }
+
+    to {
+        transform: translate(250px,200px);
+    }
+
+}
+
+@keyframes yellowMove {
+
+    from {
+        transform: translate(0,0);
+    }
+
+    to {
+        transform: translate(-200px,-150px);
+    }
+
+}
+
+/* ==============================
+   FLOATING PARTICLES
+============================== */
+
+.particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.particles span {
+    position: absolute;
+
+    width: 5px;
+    height: 5px;
+
+    background: #60a5fa;
+
+    border-radius: 50%;
+
+    opacity: 0.5;
+
+    animation: particles 10s linear infinite;
+}
+
+.particles span:nth-child(1) {
+    left: 10%;
+    animation-duration: 8s;
+}
+
+.particles span:nth-child(2) {
+    left: 30%;
+    animation-duration: 11s;
+}
+
+.particles span:nth-child(3) {
+    left: 50%;
+    animation-duration: 9s;
+}
+
+.particles span:nth-child(4) {
+    left: 70%;
+    animation-duration: 13s;
+}
+
+.particles span:nth-child(5) {
+    left: 90%;
+    animation-duration: 10s;
+}
+
+@keyframes particles {
+
+    from {
+        transform: translateY(110vh);
+    }
+
+    to {
+        transform: translateY(-20vh);
+    }
+
+}
+
+/* ==============================
+   HEADER
+============================== */
+
+header {
+
+    min-height: 430px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 40px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(55,118,171,0.95),
+            rgba(2,6,23,0.95)
+        );
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+header::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    border: 2px solid rgba(255,255,255,0.15);
+
+    border-radius: 50%;
+
+    animation: rotate 15s linear infinite;
+
+}
+
+header::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 50%;
+
+    animation: rotateReverse 20s linear infinite;
+
+}
+
+@keyframes rotate {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+@keyframes rotateReverse {
+
+    to {
+        transform: rotate(-360deg);
+    }
+
+}
+
+.hero {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+.python-icon {
+
+    font-size: 75px;
+
+    animation: bounce 2s infinite;
+
+}
+
+@keyframes bounce {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+}
+
+header h1 {
+
+    font-size: clamp(40px,8vw,75px);
+
+    margin: 10px 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #ffd43b,
+            #60a5fa,
+            #ffffff
+        );
+
+    background-size: 300%;
+
+    -webkit-background-clip: text;
+
+    color: transparent;
+
+    animation: gradientText 5s infinite;
+
+}
+
+@keyframes gradientText {
+
+    0% {
+        background-position: 0%;
+    }
+
+    50% {
+        background-position: 100%;
+    }
+
+    100% {
+        background-position: 0%;
+    }
+
+}
+
+header p {
+
+    color: #cbd5e1;
+
+    font-size: 18px;
+
+}
+
+/* ==============================
+   NAVIGATION
+============================== */
+
+nav {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+
+    background: rgba(2,6,23,0.85);
+
+    backdrop-filter: blur(15px);
+
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+
+}
+
+.nav-container {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: flex;
+
+    gap: 10px;
+
+    padding: 12px;
+
+    overflow-x: auto;
+
+}
+
+nav a {
+
+    text-decoration: none;
+
+    color: #cbd5e1;
+
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    white-space: nowrap;
+
+    transition: 0.3s;
+
+}
+
+nav a:hover {
+
+    background: #3776ab;
+
+    color: white;
+
+    transform: translateY(-3px);
+
+}
+
+/* ==============================
+   MAIN CONTAINER
+============================== */
+
+.container {
+
+    width: 92%;
+
+    max-width: 1100px;
+
+    margin: 50px auto;
+
+}
+
+/* ==============================
+   LESSON CARD
+============================== */
+
+.lesson {
+
+    background: rgba(15,23,42,0.78);
+
+    backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    margin-bottom: 35px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.35);
+
+    position: relative;
+
+    overflow: hidden;
+
+    transition: 0.4s;
+
+}
+
+.lesson:hover {
+
+    transform: translateY(-8px);
+
+    border-color: rgba(96,165,250,0.4);
+
+    box-shadow:
+        0 20px 50px rgba(37,99,235,0.2);
+
+}
+
+.lesson::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: -100%;
+
+    width: 100%;
+
+    height: 3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #3776ab,
+            #ffd43b,
+            transparent
+        );
+
+    animation: shine 4s infinite;
+
+}
+
+@keyframes shine {
+
+    0% {
+        left: -100%;
+    }
+
+    50%,100% {
+        left: 100%;
+    }
+
+}
+
+.lesson h2 {
+
+    color: #60a5fa;
+
+    font-size: 28px;
+
+    margin-bottom: 20px;
+
+}
+
+/* ==============================
+   TOPICS
+============================== */
+
+.topic {
+
+    background: rgba(30,41,59,0.7);
+
+    border: 1px solid rgba(255,255,255,0.06);
+
+    padding: 20px;
+
+    margin: 20px 0;
+
+    border-radius: 15px;
+
+    transition: 0.3s;
+
+}
+
+.topic:hover {
+
+    transform: translateX(5px);
+
+    background: rgba(30,41,59,0.95);
+
+}
+
+.topic h3 {
+
+    color: #facc15;
+
+    margin-bottom: 10px;
+
+}
+
+/* ==============================
+   CODE BLOCK
+============================== */
+
+pre {
+
+    background: #020617;
+
+    color: #dbeafe;
+
+    border: 1px solid #1e3a5f;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    overflow-x: auto;
+
+    box-shadow:
+        inset 0 0 25px rgba(37,99,235,0.1);
+
+    transition: 0.3s;
+
+}
+
+pre:hover {
+
+    border-color: #60a5fa;
+
+    box-shadow:
+        0 0 20px rgba(96,165,250,0.2);
+
+}
+
+/* ==============================
+   OUTPUT
+============================== */
+
+.output {
+
+    background: rgba(16,185,129,0.1);
+
+    border-left: 4px solid #10b981;
+
+    color: #86efac;
+
+    padding: 14px;
+
+    border-radius: 8px;
+
+    margin-top: 12px;
+
+}
+
+/* ==============================
+   IMPORTANT
+============================== */
+
+.important {
+
+    background: rgba(245,158,11,0.1);
+
+    border-left: 5px solid #f59e0b;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    color: #fde68a;
+
+    animation: pulseBox 3s infinite;
+
+}
+
+@keyframes pulseBox {
+
+    0%,100% {
+        box-shadow: 0 0 0 rgba(245,158,11,0);
+    }
+
+    50% {
+        box-shadow:
+            0 0 20px rgba(245,158,11,0.15);
+    }
+
+}
+
+/* ==============================
+   TIP
+============================== */
+
+.tip {
+
+    background: rgba(34,197,94,0.1);
+
+    border-left: 5px solid #22c55e;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    color: #86efac;
+
+}
+
+/* ==============================
+   TABLE
+============================== */
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    margin-top: 15px;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+}
+
+th {
+
+    background: #3776ab;
+
+    color: white;
+
+}
+
+th,td {
+
+    padding: 12px;
+
+    border: 1px solid #334155;
+
+    text-align: left;
+
+}
+
+tr {
+
+    transition: 0.2s;
+
+}
+
+tr:hover {
+
+    background: rgba(96,165,250,0.08);
+
+}
+
+/* ==============================
+   BADGES
+============================== */
+
+.badges {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+}
+
+.badge {
+
+    padding: 8px 14px;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #3776ab,
+            #2563eb
+        );
+
+    color: white;
+
+    font-size: 13px;
+
+    transition: 0.3s;
+
+}
+
+.badge:hover {
+
+    transform:
+        scale(1.1)
+        rotate(-2deg);
+
+}
+
+/* ==============================
+   PRACTICE
+============================== */
+
+.practice {
+
+    background: rgba(15,23,42,0.8);
+
+    border: 1px solid rgba(239,68,68,0.3);
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+}
+
+.practice h2 {
+
+    color: #f87171;
+
+    margin-bottom: 20px;
+
+}
+
+.question {
+
+    background: rgba(30,41,59,0.7);
+
+    padding: 18px;
+
+    margin: 15px 0;
+
+    border-radius: 12px;
+
+    transition: 0.3s;
+
+}
+
+.question:hover {
+
+    transform: scale(1.02);
+
+}
+
+/* ==============================
+   BUTTON
+============================== */
+
+.button {
+
+    display: inline-block;
+
+    margin-top: 20px;
+
+    padding: 12px 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #3776ab,
+            #2563eb
+        );
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 30px;
+
+    transition: 0.3s;
+
+}
+
+.button:hover {
+
+    transform:
+        translateY(-4px)
+        scale(1.05);
+
+    box-shadow:
+        0 10px 30px rgba(37,99,235,0.5);
+
+}
+
+/* ==============================
+   FOOTER
+============================== */
+
+footer {
+
+    text-align: center;
+
+    padding: 50px 20px;
+
+    background: #020617;
+
+    border-top: 1px solid #1e293b;
+
+    color: #94a3b8;
+
+}
+
+footer h2 {
+
+    color: #60a5fa;
+
+}
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media(max-width:700px) {
+
+    header {
+
+        min-height: 380px;
+
+    }
+
+    header h1 {
+
+        font-size: 42px;
+
+    }
+
+    .python-icon {
+
+        font-size: 60px;
+
+    }
+
+    .container {
+
+        width: 94%;
+
+    }
+
+    .lesson {
+
+        padding: 20px;
+
+    }
+
+    .lesson h2 {
+
+        font-size: 23px;
+
+    }
+
+    table {
+
+        font-size: 13px;
+
+    }
+
+    th,td {
+
+        padding: 8px;
+
+    }
+
+    pre {
+
+        font-size: 13px;
+
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- FLOATING PARTICLES -->
+
+<div class="particles">
+
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+
+</div>
+
+
+<!-- ==============================
+     HEADER
+============================== -->
+
+<header>
+
+<div class="hero">
+
+<div class="python-icon">
+🐍
+</div>
+
+<h1>PYTHON REVIEWER</h1>
+
+<p>
+Lessons 1–8 • Complete Python Reviewer
+</p>
+
+<a href="#lesson1" class="button">
+🚀 Start Reviewing
+</a>
+
+</div>
+
+</header>
+
+
+<!-- ==============================
+     NAVIGATION
+============================== -->
+
+<nav>
+
+<div class="nav-container">
+
+<a href="#lesson1">Lesson 1</a>
+
+<a href="#lesson2">Lesson 2</a>
+
+<a href="#lesson3">Lesson 3</a>
+
+<a href="#lesson4">Lesson 4</a>
+
+<a href="#lesson5">Lesson 5</a>
+
+<a href="#lesson6">Lesson 6</a>
+
+<a href="#lesson7">Lesson 7</a>
+
+<a href="#lesson8">Lesson 8</a>
+
+<a href="#practice">Practice</a>
+
+</div>
+
+</nav>
+
+
+<div class="container">
+
+
+<!-- =================================================
+     LESSON 1
+================================================= -->
+
+<section class="lesson" id="lesson1">
+
+<h2>📘 LESSON 1 — History of Python</h2>
+
+<div class="topic">
+
+<h3>🐍 Important Facts</h3>
+
+<table>
+
+<tr>
+<th>Topic</th>
+<th>Information</th>
+</tr>
+
+<tr>
+<td>Creator</td>
+<td>Guido van Rossum</td>
+</tr>
+
+<tr>
+<td>Implementation Started</td>
+<td>December 1989</td>
+</tr>
+
+<tr>
+<td>Name Origin</td>
+<td>Monty Python's Flying Circus</td>
+</tr>
+
+<tr>
+<td>Python 2.0</td>
+<td>October 16, 2000</td>
+</tr>
+
+<tr>
+<td>Python 3.0</td>
+<td>December 3, 2008</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="important">
+
+⭐ Remember:
+
+<b>Guido van Rossum</b> is the creator of Python.
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+     LESSON 2
+================================================= -->
+
+<section class="lesson" id="lesson2">
+
+<h2>📘 LESSON 2 — Python Basics</h2>
+
+<div class="topic">
+
+<h3>Interactive Mode</h3>
+
+<p>
+Interactive Mode lets you type Python code and immediately
+see the result.
+</p>
+
+<pre>
+>>> print("Hello")
+
+Hello
+</pre>
+
+</div>
+
+
+<div class="topic">
+
+<h3>print()</h3>
+
+<p>
+Displays information on the screen.
+</p>
+
+<pre>
+print("Hello World")
+</pre>
+
+<div class="output">
+Output: Hello World
+</div>
+
+</div>
+
+
+<div class="topic">
+
+<h3>sep</h3>
+
+<p>
+Controls what appears between multiple arguments.
+</p>
+
+<pre>
+print("Hello","Python",sep="-")
+</pre>
+
+<div class="output">
+Hello-Python
+</div>
+
+</div>
+
+
+<div class="topic">
+
+<h3>end</h3>
+
+<p>
+Controls what happens after print().
+</p>
+
+<pre>
+print("Hello",end=" ")
+print("World")
+</pre>
+
+<div class="output">
+Hello World
+</div>
+
+</div>
+
+
+<div class="topic">
+
+<h3>Variables</h3>
+
+<pre>
+num = 24
+
+word = "hi"
+
+print(num)
+print(word)
+</pre>
+
+</div>
+
+
+<div class="topic">
+
+<h3>Data Types</h3>
+
+<table>
+
+<tr>
+<th>Type</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+
+<tr>
+<td>str</td>
+<td>Text</td>
+<td>"Hello"</td>
+</tr>
+
+<tr>
+<td>int</td>
+<td>Whole number</td>
+<td>24</td>
+</tr>
+
+<tr>
+<td>float</td>
+<td>Decimal number</td>
+<td>24.5</td>
+</tr>
+
+<tr>
+<td>bool</td>
+<td>True / False</td>
+<td>True</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<div class="topic">
+
+<h3>type()</h3>
+
+<pre>
+x = 25
+
+print(type(x))
+</pre>
+
+<div class="output">
+
+&lt;class 'int'&gt;
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+     LESSON 3
+================================================= -->
+
+<section class="lesson" id="lesson3">
+
+<h2>📘 LESSON 3 — Operators, Input & Random</h2>
+
+<div class="topic">
+
+<h3>Comments</h3>
+
+<pre>
+# This is a comment
+
+print("Hello")
+</pre>
+
+</div>
+
+
+<div class="topic">
+
+<h3>Arithmetic Operators</h3>
+
+<table>
+
+<tr>
+<th>Operator</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+
+<tr>
+<td>+</td>
+<td>Addition</td>
+<td>5 + 2 = 7</td>
+</tr>
+
+<tr>
+<td>-</td>
+<td>Subtraction</td>
+<td>5 - 2 = 3</td>
+</tr>
+
+<tr>
+<td>*</td>
+<td>Multiplication</td>
+<td>5 * 2 = 10</td>
+</tr>
+
+<tr>
+<td>/</td>
+<td>Division</td>
+<td>5 / 2 = 2.5</td>
+</tr>
+
+<tr>
+<td>//</td>
+<td>Floor Division</td>
+<td>5 // 2 = 2</td>
+</tr>
+
+<tr>
+<td>%</td>
+<td>Remainder</td>
+<td>5 % 2 = 1</td>
+</tr>
+
+<tr>
+<td>**</td>
+<td>Exponentiation</td>
+<td>5 ** 2 = 25</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<div class="important">
+
+🧠 PEMDAS
+
+<br><br>
+
+Parentheses → Exponents → Multiplication / Division
+→ Addition / Subtraction
+
+</div>
+
+
+<div class="topic">
+
+<h3>input()</h3>
+
+<pre>
+name = input("Enter your name: ")
+
+print(name)
+</pre>
+
+</div>
+
+
+<div class="topic">
+
+<h3>eval()</h3>
+
+<pre>
+answer = eval(input("Enter an expression: "))
+
+print(answer)
+</pre>
+
+</div>
+
+
+<div class="topic">
+
+<h3>Random Numbers</h3>
+
+<pre>
+import random
+
+number = random.randint(1,10)
+
+print(number)
+</pre>
+
+<div class="tip">
+
+🎲 randint(1,10) produces a random whole number
+from 1 to 10.
+
+</div>
+
+</div>
+
+
+<div class="topic">
+
+<h3>abs() and round()</h3>
+
+<pre>
+print(abs(-10))
+
+print(round(5.678,2))
+</pre>
+
+<div class="output">
+
+10<br>
+5.68
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+     LESSON 4
+================================================= -->
+
+<section class="lesson" id="lesson4">
+
+<h2>📘 LESSON 4 — Strings</h2>
+
+
+<div class="topic">
+
+<h3>String</h3>
+
+<p>
+A string is a data type used to store text.
+</p>
+
+<pre>
+word = "Python"
+</pre>
+
+</div>
+
+
+<div class="topic">
+
+<h3>len()</h3>
+
+<p>
+Returns the number of characters.
+</p>
+
+<pre>
+word = "Python"
+
+print(len(word))
+</pre>
+
+<div class="output">
+6
+</div>
+
+</div>
+
+
+<div class="topic">
+
+<h3>Concatenation</h3>
+
+<p>
+Joining strings together.
+</p>
+
+<pre>
+first = "Hello"
+
+second = "Python"
+
+print(first + " " + second)
+</pre>
+
+<div class="output">
+Hello Python
+</div>
+
+</div>
+
+
+<div class="topic">
+
+<h3>String Repetition</h3>
+
+<pre>
+print("Hi " * 3)
+</pre>
+
+<div class="output">
+Hi Hi Hi
+</div>
+
+</div>
+
+
+<div class="topic">
+
+<h3>Indexing</h3>
+
+<table>
+
+<tr>
+<th>Index</th>
+<th>Meaning</th>
+</tr>
+
+<tr>
+<td>0</td>
+<td>First character</td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>Second character</td>
+</tr>
+
+<tr>
+<td>-1</td>
+<td>Last character</td>
+</tr>
+
+<tr>
+<td>-2</td>
+<td>Second-to-last character</td>
+</tr>
+
+</table>
+
+<pre>
+word = "BOOKS"
+
+print(word[0])
+print(word[1])
+print(word[-1])
+</pre>
+
+<div class="output">
+
+B<br>
+O<br>
+S
+
+</div>
+
+</div>
+
+
+<div class="topic">
+
+<h3>✂️ Slicing</h3>
+
+<p>
+Slicing selects part of a string.
+</p>
+
+<pre>
+word = "PYTHON"
+
+print(word[0:3])
+</pre>
+
+<div class="output">
+PYT
+</div>
+
+<br>
+
+<pre>
+word = "PYTHON"
+
+print(word[::2])
+</pre>
+
+<div class="output">
+PTO
+</div>
+
+<div class="important">
+
+⭐ Remember:
+
+<br><br>
+
+<code>word[start:end:step]</code>
+
+<br><br>
+
+The start is included.
+
+The end is NOT included.
+
+</div>
+
+</div>
+
+
+<div class="topic">
+
+<h3>🔤 String Methods</h3>
+
+<table>
+
+<tr>
+<th>Method</th>
+<th>Purpose</th>
+</tr>
+
+<tr>
+<td>lower()</td>
+<td>Converts to lowercase</td>
+</tr>
+
+<tr>
+<td>upper()</td>
+<td>Converts to uppercase</td>
+</tr>
+
+<tr>
+<td>replace()</td>
+<td>Replaces text</td>
+</tr>
+
+<tr>
+<td>count()</td>
+<td>Counts occurrences</td>
+</tr>
+
+<tr>
+<td>index()</td>
+<td>Returns location</td>
+</tr>
+
+<tr>
+<td>isalpha()</td>
+<td>Checks if characters are letters</td>
+</tr>
+
+</table>
+
+<pre>
+word = "BOOKS"
+
+print(word.lower())
+
+print(word.upper())
+
+print(word.replace("BOOKS","PYTHON"))
+
+print(word.count("O"))
+
+print(word.index("O"))
+
+print(word.isalpha())
+</pre>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+     LESSON 5
+================================================= -->
+
+<section class="lesson" id="lesson5">
+
+<h2>📘 LESSON 5 — Conditional Statements</h2>
+
+
+<div class="topic">
+
+<h3>if Statement</h3>
+
+<pre>
+age = 18
+
+if age >= 18:
+
+    print("You are an adult.")
+</pre>
+
+<div class="output">
+You are an adult.
+</div>
+
+</div>
+
+
+<div class="topic">
+
+<h3>if / else</h3>
+
+<pre>
+age = 18
+
+if age >= 18:
+
+    print("You are an adult.")
+
+else:
+
+    print("You are a minor.")
+</pre>
+
+</div>
+
+
+<div class="topic">
+
+<h3>Comparison Operators</h3>
+
+<table>
+
+<tr>
+<th>Operator</th>
+<th>Meaning</th>
+</tr>
+
+<tr>
+<td>==</td>
+<td>Equal to</td>
+</tr>
+
+<tr>
+<td>!=</td>
+<td>Not equal to</td>
+</tr>
+
+<tr>
+<td>&gt;</td>
+<td>Greater than</td>
+</tr>
+
+<tr>
+<td>&gt;=</td>
+<td>Greater than or equal to</td>
+</tr>
+
+<tr>
+<td>&lt;</td>
+<td>Less than</td>
+</tr>
+
+<tr>
+<td>&lt;=</td>
+<td>Less than or equal to</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<div class="topic">
+
+<h3>Logical Operators</h3>
+
+<table>
+
+<tr>
+<th>Operator</th>
+<th>Meaning</th>
+</tr>
+
+<tr>
+<td>and</td>
+<td>All conditions must be True</td>
+</tr>
+
+<tr>
+<td>or</td>
+<td>At least one condition is True</td>
+</tr>
+
+<tr>
+<td>not</td>
+<td>Reverses the result</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<div class="important">
+
+⚠️ Not equal is <b>!=</b>
+
+<br><br>
+
+Do not use <b>=!</b>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+     LESSON 6
+================================================= -->
+
+<section class="lesson" id="lesson6">
+
+<h2>📘 LESSON 6 — List, Tuple & Dictionary</h2>
+
+
+<!-- LIST -->
+
+<div class="topic">
+
+<h3>📋 LIST</h3>
+
+<p>
+
+A <b>list</b> is a general sequence object that can contain
+different types of items.
+
+Lists are <b>mutable</b>, meaning they can be changed.
+
+</p>
+
+<pre>
+heroes = ["Nana", "Yss", "Miya", "Gloo"]
+
+print(heroes)
+</pre>
+
+<div class="output">
+
+['Nana', 'Yss', 'Miya', 'Gloo']
+
+</div>
+
+</div>
+
+
+<!-- LIST METHODS -->
+
+<div class="topic">
+
+<h3>📋 List Methods</h3>
+
+<table>
+
+<tr>
+<th>Method</th>
+<th>Purpose</th>
+</tr>
+
+<tr>
+<td>append()</td>
+<td>Adds an item</td>
+</tr>
+
+<tr>
+<td>insert()</td>
+<td>Adds at a specific index</td>
+</tr>
+
+<tr>
+<td>remove()</td>
+<td>Removes an item</td>
+</tr>
+
+<tr>
+<td>pop()</td>
+<td>Removes at a specific index</td>
+</tr>
+
+<tr>
+<td>sort()</td>
+<td>Sorts items</td>
+</tr>
+
+<tr>
+<td>reverse()</td>
+<td>Reverses the order</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<!-- TUPLE -->
+
+<div class="topic">
+
+<h3>📌 TUPLE</h3>
+
+<p>
+
+A <b>tuple</b> is a sequence object like a list, but <b>immutable</b>.
+It cannot be changed.
+
+</p>
+
+<pre>
+numbers = (10, 20, 30)
+
+print(numbers)
+</pre>
+
+<div class="output">
+
+(10, 20, 30)
+
+</div>
+
+</div>
+
+
+<!-- DICTIONARY -->
+
+<div class="topic">
+
+<h3>📚 DICTIONARY</h3>
+
+<p>
+
+A <b>dictionary</b> is a collection of key-value pairs.
+
+</p>
+
+<pre>
+person = {"name": "John", "age": 25}
+
+print(person["name"])
+</pre>
+
+<div class="output">
+
+John
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+     LESSON 7
+================================================= -->
+
+<section class="lesson" id="lesson7">
+
+<h2>📘 LESSON 7 — Loops</h2>
+
+<div class="topic">
+
+<h3>for Loop</h3>
+
+<pre>
+for i in range(5):
+
+    print(i)
+</pre>
+
+<div class="output">
+
+0<br>
+1<br>
+2<br>
+3<br>
+4
+
+</div>
+
+</div>
+
+
+<div class="topic">
+
+<h3>while Loop</h3>
+
+<pre>
+i = 0
+
+while i < 5:
+
+    print(i)
+    
+    i += 1
+</pre>
+
+<div class="output">
+
+0<br>
+1<br>
+2<br>
+3<br>
+4
+
+</div>
+
+</div>
+
+
+<div class="topic">
+
+<h3>break Statement</h3>
+
+<pre>
+for i in range(10):
+
+    if i == 5:
+    
+        break
+    
+    print(i)
+</pre>
+
+<div class="output">
+
+0<br>
+1<br>
+2<br>
+3<br>
+4
+
+</div>
+
+</div>
+
+
+<div class="topic">
+
+<h3>continue Statement</h3>
+
+<pre>
+for i in range(5):
+
+    if i == 2:
+    
+        continue
+    
+    print(i)
+</pre>
+
+<div class="output">
+
+0<br>
+1<br>
+3<br>
+4
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+     LESSON 8
+================================================= -->
+
+<section class="lesson" id="lesson8">
+
+<h2>📘 LESSON 8 — Functions</h2>
+
+<div class="topic">
+
+<h3>Defining a Function</h3>
+
+<pre>
+def greet(name):
+
+    print("Hello, " + name)
+
+greet("Alice")
+</pre>
+
+<div class="output">
+
+Hello, Alice
+
+</div>
+
+</div>
+
+
+<div class="topic">
+
+<h3>Return Statement</h3>
+
+<pre>
+def add(a, b):
+
+    return a + b
+
+result = add(5, 3)
+
+print(result)
+</pre>
+
+<div class="output">
+
+8
+
+</div>
+
+</div>
+
+
+<div class="topic">
+
+<h3>Default Parameters</h3>
+
+<pre>
+def greet(name="Guest"):
+
+    print("Hello, " + name)
+
+greet()
+
+greet("Bob")
+</pre>
+
+<div class="output">
+
+Hello, Guest<br>
+Hello, Bob
+
+</div>
+
+</div>
+
+
+<div class="topic">
+
+<h3>Multiple Return Values</h3>
+
+<pre>
+def get_info():
+
+    return "John", 25
+
+name, age = get_info()
+
+print(name, age)
+</pre>
+
+<div class="output">
+
+John 25
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+     PRACTICE
+================================================= -->
+
+<section class="practice" id="practice">
+
+<h2>🎯 Practice Exercises</h2>
+
+<div class="question">
+
+<h3>Question 1: Variables & Data Types</h3>
+
+<p>
+Create a variable to store your age and another to store your 
+name. Print them both.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<h3>Question 2: Operators</h3>
+
+<p>
+Write code to calculate the area of a rectangle with length 10 
+and width 5. Use the multiplication operator.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<h3>Question 3: String Methods</h3>
+
+<p>
+Take the string "PYTHON" and convert it to lowercase, then find 
+the index of the letter 'o'.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<h3>Question 4: Conditionals</h3>
+
+<p>
+Write an if/else statement to check if a number is positive, 
+negative, or zero.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<h3>Question 5: Lists</h3>
+
+<p>
+Create a list of 5 fruits, add a new fruit using append(), and 
+print the updated list.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<h3>Question 6: Loops</h3>
+
+<p>
+Write a for loop that prints all numbers from 1 to 10.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<h3>Question 7: Functions</h3>
+
+<p>
+Create a function that takes two numbers and returns their sum. 
+Call the function with different values.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<h3>Question 8: Mixed Challenge</h3>
+
+<p>
+Create a list of numbers, loop through it, and use a function to 
+return the sum of all numbers in the list.
+</p>
+
+</div>
+
+</section>
+
+
+</div>
+
+
+<!-- ==============================
+     FOOTER
+============================== -->
+
+<footer>
+
+<h2>Python Reviewer</h2>
+
+<p>
+Master Python fundamentals with this comprehensive guide covering 
+lessons 1-8. Happy coding! 🐍
+</p>
+
+<p>
+&copy; 2024 Python Reviewer. All rights reserved.
+</p>
+
+</footer>
+
+
+</body>
+
+</html>
